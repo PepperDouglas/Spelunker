@@ -246,10 +246,7 @@ namespace Spelunker.Classes
             return string.Join(" ", newWords);
         }
         public void ListInventory() {
-            Console.WriteLine("===YOUR ITEMS===");
-            foreach (Item item in Player.Inventory.Items) {
-                Console.WriteLine("* " + item.Name);
-            }
+            Player.Inventory.ShowContents();
         }
         public void Help() {
             Console.WriteLine("Use one of the following commands:\n" +

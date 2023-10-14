@@ -27,5 +27,12 @@ namespace Spelunker.Classes
         public bool Contains(Item item) {
             return Items.Contains(item) ? true : false;
         }
+
+        public void ShowContents() {
+            Console.WriteLine("===YOUR ITEMS===");
+            foreach (Item item in this.Items) {
+                Console.WriteLine("* " + item.Name);
+            }
+        }
     }
 }
