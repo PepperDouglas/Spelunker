@@ -65,7 +65,7 @@ namespace Spelunker.Classes
             foreach (Item item in CurrentRoom.Items) {
                 if (item.Name.ToLower() == objectToPickUp) {
                     Player.Inventory.Items.Add(item);
-                    Console.WriteLine($"You pick up{item.Name}");
+                    Console.WriteLine($"You pick up the {item.Name}");
                     CurrentRoom.Items.Remove(item);
                     return;
                 }
@@ -175,6 +175,7 @@ namespace Spelunker.Classes
                         Player.Inventory.Items.RemoveAt(indexOfItemInList(item));
                         Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject));
                         Player.Inventory.Items.Add(new Item(CapitalizeFirstLetter(inventoryItem.CombinesTo)));
+                        Console.WriteLine("You got " + inventoryItem.CombinesTo);
                         //Console.WriteLine(usableObject.PickUpMessage);
                         return;
                     

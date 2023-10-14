@@ -24,7 +24,7 @@ namespace Spelunker.Classes
             //Interactable interactable = new Interactable("You see a locked chest. There is some sort of combination lock on it.", "Locked Chest");
             List<Interactable> interactables = new List<Interactable>();
             interactables.Add(new UsableInteractable("It is a chest with is some sort of combination lock on it.", "Locked Chest", "You enter the" +
-                "secret code and find a key inside", "Legible Paper", new Item("KEY")));
+                " secret code and find a key inside", "Legible Paper", new Item("KEY")));
             interactables.Add(new UsableInteractable("You see a pile of wood. There is unburnt wood in the pile.", "Wood Pile", "You" +
                 " pick up a Wooden Log", null, new Item("WOODEN LOG")));
             
@@ -39,8 +39,8 @@ namespace Spelunker.Classes
             List<Item> items = new List<Item>();
             List<Interactable> interactables =new List<Interactable>();
             interactables.Add(new UsableInteractable("You see a pillar with a flame burning bright on top.", "Flame Pillar", "You burn the Wooden Log" +
-                "and get Coal.", "Wooden Log", new Item("COAL")));
-            interactables.Add(new UsableInteractable("You need to find a key for this door", "Door", "You open the locked door", "Key", null));
+                " and get Coal.", "Wooden Log", new Item("COAL")));
+            interactables.Add(new UsableInteractable("It is a sturdy wooden door", "Door", "You open the locked door", "Key", null));
             Room room = new Room(roomTwoDesc, items, interactables, new RoomConnector(null, 1, null, 3), 2);
             return room;
         }
