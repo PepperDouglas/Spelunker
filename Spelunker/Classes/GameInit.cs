@@ -13,7 +13,8 @@ namespace Spelunker.Classes
         //NOTE: we need to know which rooms leads to which
         //=============ROOM 1=====================
         public static Room GetFirstRoom() {
-            string roomOneDesc = "This is the first room.";
+            string roomOneDesc = "This is the room that you fell down into. It is quite dark in here, and you can see the walls" +
+                " being damp and covered in black mold. You feel a cold breeze coming from the opening in the wall to the north.";
             //ADD ITEM AND ITEM TO LIST
             //removing wooden log, as it shouldnt be available unless "use wood pile" command is used
             //Item item = new Item("Wooden Log", "This is a wooden log", "Bowl of Fire", "Coal");
@@ -33,7 +34,8 @@ namespace Spelunker.Classes
 
         }
         public static Room GetSecondRoom() {
-            string roomTwoDesc = "This is the second room.";
+            string roomTwoDesc = "The cobblestones in this room form a circular pattern around a pillar, where a flame burns bright. There is" +
+                " water slowly dripping down from the cieling, creating small puddles around the room.";
             List<Item> items = new List<Item>();
             List<Interactable> interactables =new List<Interactable>();
             interactables.Add(new UsableInteractable("You see a pillar with a flame burning bright on top.", "Flame Pillar", "You burn the Wooden Log" +
@@ -43,7 +45,9 @@ namespace Spelunker.Classes
             return room;
         }
         public static Room GetThirdRoom() {
-            string roomThreeDesc = "This is the third room.";
+            string roomThreeDesc = "The room is quite dark, but from the light in the previous room, you can make out several cobwebs" +
+                " in the corners of the room. The cobblestone floor is covered in a thin layer of dust. It seems this area has been" +
+                " undisturbed for a long time.";
             List<Item> items = new List<Item>();
             List<Interactable> interactables = new List<Interactable>();
             items.Add(new Item("Paper", "There are some scratches on this paper, but they are quite hard to see...", "Coal", "Legible Paper", false));
@@ -52,10 +56,11 @@ namespace Spelunker.Classes
             return room;
         }
         public static Room GetFourthRoom() {
-            string roomFourDesc = "This is the fourth room.";
+            string roomFourDesc = "This room is the brightest so far, with intricate stucco decorating the walls. You notice footprints leading" +
+                " up to the door you just came from, by inspecting where the dust has been disturbed.";
             List<Item> items = new List<Item>();
             List<Interactable> interactables = new List<Interactable>();
-            interactables.Add(new Interactable("You see a Staircase with light shining down from the upper floors", "Staircase"));
+            interactables.Add(new Interactable("You see a staircase with light shining down from the upper floors", "Staircase"));
             Room room = new Room(roomFourDesc, items, interactables, new RoomConnector(null, null, null, 2), 4);
             return room;
         }
