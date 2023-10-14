@@ -24,9 +24,9 @@ namespace Spelunker.Classes
             //Interactable interactable = new Interactable("You see a locked chest. There is some sort of combination lock on it.", "Locked Chest");
             List<Interactable> interactables = new List<Interactable>();
             interactables.Add(new UsableInteractable("It is a chest with is some sort of combination lock on it.", "Locked Chest", "You enter the" +
-                "secret code and find a key inside", "Legible Paper", new Item("Key", "A mysterious key that seems to fit in a lock", "Door", null, false)));
+                "secret code and find a key inside", "Legible Paper", new Item("KEY")));
             interactables.Add(new UsableInteractable("You see a pile of wood. There is unburnt wood in the pile.", "Wood Pile", "You" +
-                " pick up a Wooden Log", null, new Item("Wooden Log", "This is a sturdy wooden log, great for making fires", "Flame Pillar", "Coal", true)));
+                " pick up a Wooden Log", null, new Item("WOODEN LOG")));
             
             Room room = new Room(roomOneDesc, items, interactables, new RoomConnector(2,null,null,null), 1);
 
@@ -39,7 +39,7 @@ namespace Spelunker.Classes
             List<Item> items = new List<Item>();
             List<Interactable> interactables =new List<Interactable>();
             interactables.Add(new UsableInteractable("You see a pillar with a flame burning bright on top.", "Flame Pillar", "You burn the Wooden Log" +
-                "and get Coal.", "Wooden Log", new Item("Coal", "You see a lump of coal. It leaves soot where it touches.", "Paper", "Legible Paper", false)));
+                "and get Coal.", "Wooden Log", new Item("COAL")));
             interactables.Add(new UsableInteractable("You need to find a key for this door", "Door", "You open the locked door", "Key", null));
             Room room = new Room(roomTwoDesc, items, interactables, new RoomConnector(null, 1, null, 3), 2);
             return room;
@@ -50,7 +50,7 @@ namespace Spelunker.Classes
                 " undisturbed for a long time.";
             List<Item> items = new List<Item>();
             List<Interactable> interactables = new List<Interactable>();
-            items.Add(new Item("Paper", "There are some scratches on this paper, but they are quite hard to see...", "Coal", "Legible Paper", false));
+            items.Add(new Item("PAPER"));
             interactables.Add(new Interactable("You inspect a skeleton laying in the corner of the room. You see nothing of interest.", "Skeleton"));
             Room room = new Room(roomThreeDesc, items, interactables, new RoomConnector(null, null, 2, null), 3);
             return room;
