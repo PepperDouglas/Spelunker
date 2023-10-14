@@ -35,7 +35,7 @@ namespace Spelunker.Classes
             string acceptedDirections = "nwse";
             if (userInput == "look") {
                 Console.WriteLine(CurrentRoom.RoomID);
-                Looking(userInput);
+                Looking();
             } else if (userInput.StartsWith("look at ")) {
                 LookingAt(userInput);
             } else if (userInput == "help") {
@@ -282,35 +282,9 @@ namespace Spelunker.Classes
             }
             Console.WriteLine("There is no such object in this room or your inventory.");
         }
-        public void Looking(string userInput) {
-            Console.WriteLine(CurrentRoom.Description);
-            if (CurrentRoom.Interactables.Count > 0) {
-                string interactables = "";
-                interactables += "In the room you also see";
-                for (int i = 0; i < CurrentRoom.Interactables.Count; i++) {
-                    string prefix = IsAVowel(Char.ToLower(CurrentRoom.Interactables[i].Name[0])) == true ? " an " : " a ";
-                    string needAnd = i == CurrentRoom.Interactables.Count - 2 ? " and" : "";
-                    interactables += prefix + CurrentRoom.Interactables[i].Name;
-                    interactables += i != CurrentRoom.Interactables.Count - 1 ? "," + needAnd  : ".";
-                }
-                Console.WriteLine(interactables);
-            }
-            if (CurrentRoom.Items.Count > 0) {
-                string items = "";
-                items += "There is also the following items:";
-                for (int i = 0; i < CurrentRoom.Items.Count; i++) {
-                    string prefix = IsAVowel(Char.ToLower(CurrentRoom.Items[i].Name[0])) == true ? " an " : " a ";
-                    string needAnd = i == CurrentRoom.Items.Count - 2 ? " and" : "";
-                    items += prefix + CurrentRoom.Items[i].Name;
-                    items += i != CurrentRoom.Items.Count - 1 ? "," + needAnd : ".";
-                }
-                Console.WriteLine(items);
-            }
-        }
-
-        public bool IsAVowel(char character) {
-            string vowels = "aeyuio";
-            return vowels.Contains(character);
-        }
+        public void Looking() {
+            CurrentRoom.PrintDescription();
+            CurrentRoom.PrintItems();          
+        }       
     }
 }
