@@ -9,9 +9,7 @@ namespace Spelunker.Classes
     public class Player
     {
         public Inventory Inventory { get; set; }
-        //public Room CurrentRoom { get; set; }
         
-
         public Player(Inventory inventory) {
             Inventory = inventory;
         }
