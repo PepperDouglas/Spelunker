@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Spelunker.Classes.HelperFunctions;
 
 namespace Spelunker.Classes
 {
@@ -159,8 +160,8 @@ namespace Spelunker.Classes
                     }
 
                     if(StringyfyNull(inventoryItem) == theObject ? true : false && inventoryItem.Name.ToLower() == item) {                    
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item));
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject));
+                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
+                        Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject, Player));
                         Player.Inventory.Items.Add(new Item(CapitalizeFirstLetter(inventoryItem.CombinesTo)));
                         Console.WriteLine("You got " + inventoryItem.CombinesTo);
                         return;       
@@ -182,7 +183,7 @@ namespace Spelunker.Classes
                         return;
                     } else if (PlayerHasRequiredItem(usableObject.RequiredItem, Player.Inventory) && usableObject.RequiredItem.ToLower() == item) {
                         //REMOVE USED ITEM HERE, IF THE ITEM HAS A REMOVED ON USE-TAG...FOR NOW REMOVE ALL OF THEM, EVEN KEYS
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item));
+                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
                         if (usableObject.ReceivedItem != null) {
                             Player.Inventory.Items.Add(usableObject.ReceivedItem);
                         }
@@ -197,46 +198,11 @@ namespace Spelunker.Classes
             }            
             Console.WriteLine("It seems like I can't use it this way.");
         }
-        public string StringyfyNull(Item item) {
-            return item.CombinesWith == null ? "" : item.CombinesWith.ToLower();
-        }
-        public int indexOfItemInList(string itemName) {
-            return Player.Inventory.Items.FindIndex(i => i.Name.ToLower() == itemName);
-        }
-        public bool PlayerHasRequiredItem(string usable, Inventory inventory) {
-            foreach (Item item in inventory.Items)
-            {
-                if (item.Name.ToLower() == usable.ToLower()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        public string CapitalizeFirstLetter(string str) {
-            string[] words = str.Split(' ');
-            string[] newWords = new string[words.Length];
-            for (int i = 0; i < words.Length; i++)
-            {
-                string[] splitWord = words[i].Split("");
-                splitWord[0] = splitWord[0].ToString().ToUpper();
-                string newWord = string.Join("", splitWord);
-                newWords[i] = newWord;
-            }
-            return string.Join(" ", newWords);
-        }
+
         public void ListInventory() {
             Player.Inventory.ShowContents();
         }
-        public void Help() {
-            Console.WriteLine("Use one of the following commands:\n" +
-                "N / S / W / E : Move North, South, West or East in the dungeon\n" +
-                "Look : Observe your surroundings\n" +
-                "Look at X: Inspect an object named X\n" +
-                "Take X : Pick up an item X and put it in your inventory\n" +
-                "Use X : Use an item X from your inventory, or interact with an object X in the room\n" +
-                "Use X on Y : Use an item X from your inventory on an item or object Y in the inventory or room\n" +
-                "Inventory : List the items in your inventory");
-        }
+        
         public void LookingAt(string userInput) {
             string objectToLookAt = userInput.Split("look at ")[1];
             foreach (Interactable interactable in CurrentRoom.Interactables)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Spelunker.Classes.HelperFunctions;
 
 namespace Spelunker.Classes
 {
@@ -30,7 +31,7 @@ namespace Spelunker.Classes
                 string interactables = "";
                 interactables += "In the room you also see";
                 for (int i = 0; i < this.Interactables.Count; i++) {
-                    string prefix = HelperFunctions.IsAVowel(Char.ToLower(this.Interactables[i].Name[0])) == true ? " an " : " a ";
+                    string prefix = IsAVowel(Char.ToLower(this.Interactables[i].Name[0])) == true ? " an " : " a ";
                     string needAnd = i == this.Interactables.Count - 2 ? " and" : "";
                     interactables += prefix + this.Interactables[i].Name;
                     interactables += i != this.Interactables.Count - 1 ? "," + needAnd : ".";
@@ -41,7 +42,7 @@ namespace Spelunker.Classes
                 string items = "";
                 items += "There is also the following items:";
                 for (int i = 0; i < this.Items.Count; i++) {
-                    string prefix = HelperFunctions.IsAVowel(Char.ToLower(this.Items[i].Name[0])) == true ? " an " : " a ";
+                    string prefix = IsAVowel(Char.ToLower(this.Items[i].Name[0])) == true ? " an " : " a ";
                     string needAnd = i == this.Items.Count - 2 ? " and" : "";
                     items += prefix + this.Items[i].Name;
                     items += i != this.Items.Count - 1 ? "," + needAnd : ".";
