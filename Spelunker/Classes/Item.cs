@@ -62,7 +62,7 @@ namespace Spelunker.Classes
             {
                 "Paper",
                 "There are some scratches on this paper, but they are quite hard to see...",
-                "Coal",
+                "null",
                 "Legible Paper",
                 "false"
             };

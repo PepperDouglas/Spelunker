@@ -19,6 +19,7 @@ namespace Spelunker.Classes
             Rooms = rooms;
             CurrentRoom = Rooms[roomID - 1];
         }
+
         public void Run() {
             Console.WriteLine("You have fallen down a well in to a dark dungeon. Use your wit to find the way out!" +
                 "\nType \"Help\" for available commands.");
@@ -28,6 +29,7 @@ namespace Spelunker.Classes
                 ActionFromInput(userInput);
             }
         }
+
         public void ActionFromInput(string userInput) {
             userInput = userInput.ToLower();
             string acceptedDirections = "nwse";
@@ -39,7 +41,9 @@ namespace Spelunker.Classes
             } else if (userInput == "help") {
                 Help();
             } else if (userInput.StartsWith("take ")) {
-                PickUpItem(userInput);
+                Room tempRoom = CurrentRoom;
+                Player.PickUpItem(userInput, ref tempRoom);
+                CurrentRoom = tempRoom; 
             } else if (userInput == "inventory") {
                 ListInventory();
             } else if (userInput.StartsWith("use ") && !userInput.Contains(" on ")) {
@@ -50,25 +54,7 @@ namespace Spelunker.Classes
                 UseItemOnObject(userInput);
             } 
         }
-        public void PickUpItem(string userInput) {
-            string objectToPickUp = userInput.Split("take ")[1];
 
-            foreach (Item item in Player.Inventory.Items)
-            {
-                if (item.Name.ToLower() == objectToPickUp) {
-                    Console.WriteLine("You already have that item...");
-                }
-            }
-            foreach (Item item in CurrentRoom.Items) {
-                if (item.Name.ToLower() == objectToPickUp) {
-                    Player.Inventory.Items.Add(item);
-                    Console.WriteLine($"You pick up the {item.Name}");
-                    CurrentRoom.Items.Remove(item);
-                    return;
-                }
-            }
-            Console.WriteLine("You cannot pick up that.");
-        }
         public void RoomTransition(string direction, RoomConnector availableDirections) {
             switch (direction) {
                 case "w":
@@ -131,11 +117,11 @@ namespace Spelunker.Classes
                     if (usableObject.RequiredItem != null) {
                         Console.WriteLine("It seems you might be missing something");
                         return;
-                    } else if (Player.Inventory.Items.Contains(usableObject.ReceivedItem)) {
+                    } else if (Player.Inventory.Contains(usableObject.ReceivedItem)) {
                         Console.WriteLine("You have already picked up that item!");
                         return;
                     } else {
-                        Player.Inventory.Items.Add(usableObject.ReceivedItem);
+                        Player.Inventory.Add(usableObject.ReceivedItem);
                         Console.WriteLine(usableObject.PickUpMessage);
                         return;
                     }
@@ -143,6 +129,7 @@ namespace Spelunker.Classes
             }
             Console.WriteLine("It seems like I can't use it this way.");
         }
+
         public void UseItemOnObject(string userInput) {
             string item = userInput.Split("use ")[1].Split(" on")[0];
             string theObject = userInput.Split(" on ")[1];
@@ -162,7 +149,7 @@ namespace Spelunker.Classes
                     if(StringyfyNull(inventoryItem) == theObject ? true : false && inventoryItem.Name.ToLower() == item) {                    
                         Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
                         Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject, Player));
-                        Player.Inventory.Items.Add(new Item(CapitalizeFirstLetter(inventoryItem.CombinesTo)));
+                        Player.Inventory.Add(new Item(CapitalizeFirstLetter(inventoryItem.CombinesTo)));
                         Console.WriteLine("You got " + inventoryItem.CombinesTo);
                         return;       
                     }
@@ -185,7 +172,7 @@ namespace Spelunker.Classes
                         //REMOVE USED ITEM HERE, IF THE ITEM HAS A REMOVED ON USE-TAG...FOR NOW REMOVE ALL OF THEM, EVEN KEYS
                         Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
                         if (usableObject.ReceivedItem != null) {
-                            Player.Inventory.Items.Add(usableObject.ReceivedItem);
+                            Player.Inventory.Add(usableObject.ReceivedItem);
                         }
                         Console.WriteLine(usableObject.PickUpMessage);
 
@@ -227,6 +214,7 @@ namespace Spelunker.Classes
             }
             Console.WriteLine("There is no such object in this room or your inventory.");
         }
+
         public void Looking() {
             CurrentRoom.PrintDescription();
             CurrentRoom.PrintItems();          
