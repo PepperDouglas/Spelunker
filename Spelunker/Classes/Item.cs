@@ -48,7 +48,7 @@ namespace Spelunker.Classes
                 "A mysterious key that seems to fit in a lock",
                 "Door",
                 "null",
-                "false"
+                "true"
             };
             string[] coal = new string[]
             {
@@ -64,7 +64,7 @@ namespace Spelunker.Classes
                 "There are some scratches on this paper, but they are quite hard to see...",
                 "null",
                 "Legible Paper",
-                "false"
+                "true"
             };
             ItemList["PAPER"] = paper;
             ItemList["COAL"] = coal;

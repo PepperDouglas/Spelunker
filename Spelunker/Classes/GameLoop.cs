@@ -146,9 +146,13 @@ namespace Spelunker.Classes
                         return;
                     }
 
-                    if(StringyfyNull(inventoryItem) == theObject ? true : false && inventoryItem.Name.ToLower() == item) {                    
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject, Player));
+                    if(StringyfyNull(inventoryItem) == theObject ? true : false && inventoryItem.Name.ToLower() == item) {
+                        if (Player.Inventory.Items[indexOfItemInList(item, Player)].IsDeleted) {
+                            Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
+                        }
+                        if (Player.Inventory.Items[indexOfItemInList(theObject, Player)].IsDeleted) {
+                            Player.Inventory.Items.RemoveAt(indexOfItemInList(theObject, Player));
+                        }
                         Player.Inventory.Add(new Item(CapitalizeFirstLetter(inventoryItem.CombinesTo)));
                         Console.WriteLine("You got " + inventoryItem.CombinesTo);
                         return;       
@@ -170,7 +174,10 @@ namespace Spelunker.Classes
                         return;
                     } else if (PlayerHasRequiredItem(usableObject.RequiredItem, Player.Inventory) && usableObject.RequiredItem.ToLower() == item) {
                         //REMOVE USED ITEM HERE, IF THE ITEM HAS A REMOVED ON USE-TAG...FOR NOW REMOVE ALL OF THEM, EVEN KEYS
-                        Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
+                        if (Player.Inventory.Items[indexOfItemInList(item, Player)].IsDeleted) {
+                            Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
+                        }
+
                         if (usableObject.ReceivedItem != null) {
                             Player.Inventory.Add(usableObject.ReceivedItem);
                         }
