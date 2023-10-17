@@ -16,7 +16,7 @@ namespace Spelunker.Classes
             List<Interactable> interactables = new List<Interactable>();
 
             interactables.Add(new UsableInteractable("It is a chest with is some sort of combination lock on it.", "Locked Chest", "You enter the" +
-                " secret code and find a key inside", "Legible Paper", new Item("KEY")));
+                " secret code and find a key inside", "SPECIAL", new Item("KEY")));
             interactables.Add(new UsableInteractable("You see a pile of wood. There is unburnt wood in the pile.", "Wood Pile", "You" +
                 " pick up a Wooden Log", null, new Item("WOODEN LOG")));
             

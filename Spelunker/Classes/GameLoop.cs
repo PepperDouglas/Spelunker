@@ -115,7 +115,16 @@ namespace Spelunker.Classes
             foreach (UsableInteractable usableObject in CurrentRoom.Interactables.OfType<UsableInteractable>()) {
                 if (usableObject.Name.ToLower() == itemToUse) {
                     if (usableObject.RequiredItem != null) {
-                        Console.WriteLine("It seems you might be missing something");
+                        bool passingTest = true;
+                        List<Interactable> roomInteractables = CurrentRoom.Interactables;
+                        passingTest = usableObject.InteractableEvent(usableObject, ref roomInteractables);//have the function here for chest quest
+                        if (passingTest) {
+                            CurrentRoom.Interactables = roomInteractables;
+                            Player.Inventory.Add(usableObject.ReceivedItem);
+                            Console.WriteLine(usableObject.PickUpMessage);
+                        } else {
+                            Console.WriteLine("It seems you might be missing something");
+                        }
                         return;
                     } else if (Player.Inventory.Contains(usableObject.ReceivedItem)) {
                         Console.WriteLine("You have already picked up that item!");
@@ -173,7 +182,6 @@ namespace Spelunker.Classes
                         Console.WriteLine("You have already picked up that item!");
                         return;
                     } else if (PlayerHasRequiredItem(usableObject.RequiredItem, Player.Inventory) && usableObject.RequiredItem.ToLower() == item) {
-                        //REMOVE USED ITEM HERE, IF THE ITEM HAS A REMOVED ON USE-TAG...FOR NOW REMOVE ALL OF THEM, EVEN KEYS
                         if (Player.Inventory.Items[indexOfItemInList(item, Player)].IsDeleted) {
                             Player.Inventory.Items.RemoveAt(indexOfItemInList(item, Player));
                         }
