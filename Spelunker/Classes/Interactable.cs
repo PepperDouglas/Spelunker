@@ -27,6 +27,7 @@ namespace Spelunker.Classes
                     Console.WriteLine("The locked chest opens...");
                     return true;
                 } else {
+                    Console.WriteLine("It doesn't seem to work");
                     return false;
                 }
             }
