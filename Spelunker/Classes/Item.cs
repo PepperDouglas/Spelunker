@@ -34,18 +34,48 @@ namespace Spelunker.Classes
                 "false"
 
             };
+            string[] woodenLog = new string[]
+            {
+                "Wooden Log",
+                "This is a sturdy wooden log, great for making fires", 
+                "Flame Pillar",
+                "Coal",
+                "true"
+            };
+            string[] key = new string[]
+            {
+                "Key",
+                "A mysterious key that seems to fit in a lock",
+                "Door",
+                "null",
+                "true"
+            };
+            string[] coal = new string[]
+            {
+                "Coal",
+                "You see a lump of coal. It leaves soot where it touches.",
+                "Paper",
+                "Legible Paper",
+                "false"
+            };
+            string[] paper = new string[]
+            {
+                "Paper",
+                "There are some scratches on this paper, but they are quite hard to see...",
+                "null",
+                "Legible Paper",
+                "true"
+            };
+            ItemList["PAPER"] = paper;
+            ItemList["COAL"] = coal;
+            ItemList["KEY"] = key;
+            ItemList["WOODEN LOG"] = woodenLog;
             ItemList["LEGIBLE PAPER"] = legiblePaper;
             Name = ItemList[name][0];
             Description = ItemList[name][1];
             CombinesWith = ItemList[name][2] != "null" ? ItemList[name][2] : null;
-            CombinesWith = ItemList[name][3] != "null" ? ItemList[name][3] : null;
+            CombinesTo = ItemList[name][3] != "null" ? ItemList[name][3] : null;
             IsDeleted = ItemList[name][4] != "false" ? true : false;
-
-
-
-
         }
-
-
     }
 }
