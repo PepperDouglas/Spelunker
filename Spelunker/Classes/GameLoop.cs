@@ -113,14 +113,16 @@ namespace Spelunker.Classes
 
             //lets just check usable items in the surrounding first ==>
             foreach (UsableInteractable usableObject in CurrentRoom.Interactables.OfType<UsableInteractable>()) {
-                if (usableObject.Name.ToLower() == itemToUse) {
+                if (usableObject.Name.ToLower() == itemToUse.ToLower()) {
                     if (usableObject.RequiredItem != null) {
                         bool passingTest = true;
                         List<Interactable> roomInteractables = CurrentRoom.Interactables;
                         passingTest = usableObject.InteractableEvent(usableObject, ref roomInteractables);//have the function here for chest quest
                         if (passingTest) {
                             CurrentRoom.Interactables = roomInteractables;
-                            Player.Inventory.Add(usableObject.ReceivedItem);
+                            if (usableObject.ReceivedItem != null) { //added
+                                Player.Inventory.Add(usableObject.ReceivedItem);
+                            }
                             Console.WriteLine(usableObject.PickUpMessage);
                         } else {
                             Console.WriteLine("It seems you might be missing something");
