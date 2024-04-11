@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace Spelunker.Classes
                     Console.WriteLine("It doesn't seem to work");
                     return false;
                 }
+            } else if (interactable.Name == "Door") {
+                return false;
             }
             return true;
         }
